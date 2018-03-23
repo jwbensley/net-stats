@@ -34,10 +34,10 @@ do
     TX_BYTES_2=$(sudo ethtool -S $IF | grep -m 1 -E "^ +tx_bytes:" | awk '{print $NF}')
     TX_PPS_2=$(sudo ethtool -S $IF | grep -m 1 -E "^ +tx_packets:" | awk '{print $NF}')
 
-    RX_BYTES="$(expr $RX_BYTES_2 - $RX_BYTES_1)"
-    RX_PPS="$(expr $RX_PPS_2 - $RX_PPS_1)"
-    TX_BYTES="$(expr $TX_BYTES_2 - $TX_BYTES_1)"
-    TX_PPS="$(expr $TX_PPS_2 - $TX_PPS_1)"
+    RX_BYTES=$(expr $RX_BYTES_2 - $RX_BYTES_1)
+    RX_PPS=$(expr $RX_PPS_2 - $RX_PPS_1)
+    TX_BYTES=$(expr $TX_BYTES_2 - $TX_BYTES_1)
+    TX_PPS=$(expr $TX_PPS_2 - $TX_PPS_1)
 
     bcc -v > /dev/null 2>&1
     if [[ $? -eq 0 ]]
