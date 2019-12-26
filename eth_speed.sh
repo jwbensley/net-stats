@@ -39,7 +39,7 @@ do
     TX_BYTES=$(expr $TX_BYTES_2 - $TX_BYTES_1)
     TX_PPS=$(expr $TX_PPS_2 - $TX_PPS_1)
 
-    bcc -v > /dev/null 2>&1
+    bc -v > /dev/null 2>&1
     if [[ $? -eq 0 ]]
     then
         RX_GBPS=$(echo "scale=2; $RX_BYTES * 8 / 1000 / 1000 / 1000 "| bc)
