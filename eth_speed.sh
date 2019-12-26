@@ -19,6 +19,17 @@ fi
 
 IF=$1
 
+
+use_bc=0
+which bc > /dev/null
+if [[ $? -eq 0 ]]
+then
+    use_bc=1
+else
+    use_bc=0
+fi
+
+
 while true
 do
 
@@ -39,8 +50,7 @@ do
     TX_BYTES=$(expr $TX_BYTES_2 - $TX_BYTES_1)
     TX_PPS=$(expr $TX_PPS_2 - $TX_PPS_1)
 
-    bc -v > /dev/null 2>&1
-    if [[ $? -eq 0 ]]
+    if [ $use_bc -eq 1 ]
     then
         RX_GBPS=$(echo "scale=2; $RX_BYTES * 8 / 1000 / 1000 / 1000 "| bc)
         TX_GBPS=$(echo "scale=2; $TX_BYTES * 8 / 1000 / 1000 / 1000 "| bc)
