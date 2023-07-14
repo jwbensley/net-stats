@@ -4,6 +4,8 @@
 # The stats come from ethtool (the NIC driver).
 # By jwbensley@gmail.com / https://github.com/jwbensley
 
+set -eu
+
 
 INTERVAL="1" # update interval in seconds
 
@@ -19,6 +21,13 @@ fi
 
 IF=$1
 
+
+which ethtool > /dev/null
+if [[ $? -ne 0 ]]
+then
+    echo "ethtool is required, please install it"
+    exit 1
+fi
 
 use_bc=0
 which bc > /dev/null
